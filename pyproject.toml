@@ -1,0 +1,19 @@
+[project]
+name = "production-ready-ds"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+authors = [
+    { name = "davidkasdas", email = "david.kasdas@hotmail.com" }
+]
+requires-python = ">=3.13"
+dependencies = [
+    "scikit-learn>=1.9.0",
+]
+
+[project.scripts]
+production-ready-ds = "production_ready_ds:main"
+
+[build-system]
+requires = ["uv_build>=0.12.3,<0.13.0"]
+build-backend = "uv_build"
