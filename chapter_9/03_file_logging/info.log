@@ -1,0 +1,6 @@
+2026-08-18 10:45:27 | INFO | file_logging:main:20 - This message appears in both terminal and file
+2026-08-18 10:45:27 | WARNING | file_logging:main:21 - This warning appears in both terminal and file
+2026-08-18 10:45:27 | ERROR | file_logging:main:22 - This error appears in both terminal and file
+2026-08-18 10:45:43 | INFO | file_logging:main:20 - This message appears in both terminal and file
+2026-08-18 10:45:43 | WARNING | file_logging:main:21 - This warning appears in both terminal and file
+2026-08-18 10:45:43 | ERROR | file_logging:main:22 - This error appears in both terminal and file

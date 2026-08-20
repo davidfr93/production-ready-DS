@@ -1,0 +1,3 @@
+2026-08-18 14:28:32.619 | INFO     | __main__:main:15 - Hello World
+2026-08-18 14:28:32.619 | INFO     | __main__:main:17 - Hello again
+2026-08-18 14:28:32.619 | WARNING  | __main__:main:18 - Hello warning

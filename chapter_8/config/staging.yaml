@@ -1,0 +1,4 @@
+data_source: s3
+bucket: staging-ml-bucket
+file_path: datasets/winequality-red.csv
+logging_level: INFO

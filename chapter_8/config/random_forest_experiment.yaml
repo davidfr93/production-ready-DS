@@ -1,0 +1,10 @@
+split:
+  test_size: 0.2
+  random_state: 42
+
+train:
+  model: RandomForest
+  hyperparameters:
+    n_estimators: 200
+    max_depth: 15
+    min_samples_split: 5

@@ -1,0 +1,3 @@
+data_source: csv
+file_path: data/raw/winequality-red.csv
+logging_level: DEBUG

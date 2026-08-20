@@ -1,0 +1,12 @@
+split:
+  test_size: 0.2
+  random_state: 42
+
+train:
+  model: SVM
+  hyperparameters:
+    kernel: rbf
+    C: 1.0
+    gamma: 0.001
+
+

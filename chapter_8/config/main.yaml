@@ -1,0 +1,10 @@
+data_path:
+  raw: data/raw/winequality-red.csv
+  intermediate: data/intermediate
+
+model_path: models/model.pkl
+
+columns:
+  to_drop:
+    - free sulfur dioxide
+  target: quality
