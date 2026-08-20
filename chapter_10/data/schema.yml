@@ -1,0 +1,7 @@
+schema_type: dataframe
+columns:
+  customer_id:
+    dtype: int64
+    unique: true
+    greater_than_or_equal_to: 1
+drop_invalid_rows: false

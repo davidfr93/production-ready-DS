@@ -617,73 +617,142 @@ anonymized_df = anonymize_customer_data(customer_data)
 print(anonymized_df)
 
 #----------------------------
-# Check Both Inputs and Outputs
-#----------------------------
-
-
-
-#----------------------------
-# Check Both Inputs and Outputs
-#----------------------------
-
-
-
-
-
-#----------------------------
-# Check Both Inputs and Outputs
-#----------------------------
-
-
-
-#----------------------------
-# Check Both Inputs and Outputs
+# Export and Load From a YAML File
 #----------------------------
 
 
 #----------------------------
-# Check Both Inputs and Outputs
+# Export to YAML
+#----------------------------
+from pathlib import Path
+import pandera.pandas as pa
+
+# Define the schema
+schema = pa.DataFrameSchema(
+    {
+        "customer_id": pa.Column(
+            int, checks=pa.Check.ge(1), unique=True
+        )
+    }
+)
+print(schema)
+!ls
+# Get a YAML object
+print(schema.to_yaml())
+yaml_schema = schema.to_yaml()
+# Save to a file
+f = Path("data/schema.yml")
+f.touch()
+f.write_text(yaml_schema)
+
+from pathlib import Path
+f = Path("data/schema.yml")
+
+with f.open() as file:
+    yaml_schema = file.read()
+
+
+schema = pa.io.from_yaml(yaml_schema)
+
+
+def analyze_sales_data(sales_df: pd.DataFrame) -> dict:
+	# Problems only discovered during processing
+	revenue = sales_df["price"] * sales_df["quantity"]
+
+	return {
+		"total_revenue": revenue.sum(),
+		"max_sale": sales_df["quantity"].max(),
+	}
+
+
+if __name__ == "__main__":
+	# Data with issues
+	data = pd.DataFrame(
+		{
+			"price": [50, 100, "invalid", 75],
+			"quantity": [5, 3, 2, "error"],
+		}
+	)
+	try:
+		results = analyze_sales_data(data)
+		print(results)
+	except Exception as e:
+		print(f"Error during analysis: {e}")
+
+
+# Define schema for sales DataFrame
+sales_schema = pa.DataFrameSchema(
+    {
+        "price": pa.Column(float, checks=[pa.Check.ge(0)]),
+        "quantity": pa.Column(int, checks=[pa.Check.ge(0)]),
+    }
+)
+
+print(sales_schema)
+
+@check_input(sales_schema)
+def analyze_sales_data(sales_df: pd.DataFrame) -> dict:
+    revenue = sales_df["price"] * sales_df["quantity"]
+
+    return {
+        "total_revenue": revenue.sum(),
+        "max_sale": sales_df["quantity"].max(),
+    }
+
+data = pd.DataFrame(
+    {
+        "price": [50, 100, "invalid", 75],
+        "quantity": [5, 3, 2, "error"],
+    }
+)
+data
+
+try:
+    results = analyze_sales_data(data)
+    print(results)
+except pa.errors.SchemaError as e:
+    print("SchemaError:", e)
+
+
+
+
+#----------------------------
+# Validate Only Critical Columns
+#----------------------------
+# Only validate columns used in the calculation
+schema = pa.DataFrameSchema(
+	{
+		"amount": pa.Column(float, checks=pa.Check.gt(0)),
+		"store": pa.Column(
+			str, checks=pa.Check.isin(["A", "B"])
+		),
+	}
+)
+
+print(schema)
+
+@pa.check_input(schema)
+def get_amount_by_store(df):
+	return df.groupby("store")["amount"].sum()
+
+
+df = pd.DataFrame(
+	{
+		"customer_id": [1, 2, 3],
+		"amount": [100.0, 200.0, 300.0],
+		"date": ["2023-01-01", "2023-01-02", "2023-01-03"],
+		"store": ["A", "B", "A"],
+	}
+)
+df
+
+
+amount_by_store = get_amount_by_store(df)
+
+#----------------------------
+# THE END
 #----------------------------
 
-
-
-
-
-
-#----------------------------
-# Check Both Inputs and Outputs
-#----------------------------
-
-
-
-#----------------------------
-# Check Both Inputs and Outputs
-#----------------------------
-
-
-#----------------------------
-# Check Both Inputs and Outputs
-#----------------------------
-
-
-
-
-
-
-#----------------------------
-# Check Both Inputs and Outputs
-#----------------------------
-
-
-
-#----------------------------
-# Check Both Inputs and Outputs
-#----------------------------
-
-
-#----------------------------
-# Check Both Inputs and Outputs
-#----------------------------
 
 
 

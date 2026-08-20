@@ -1,0 +1,17 @@
+schema_type: dataframe
+columns:
+  customer_id:
+    dtype: int64
+    unique: true
+    greater_than_or_equal_to: 1
+  age:
+    dtype: int64
+    in_range:
+      min_value: 0
+      max_value: 120
+      include_min: true
+      include_max: true
+  transaction_amount:
+    dtype: float64
+    greater_than_or_equal_to: 0
+drop_invalid_rows: false
