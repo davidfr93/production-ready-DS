@@ -1,0 +1,19 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+
+[project]
+name = "pandas-processors"
+version = "0.1.0"
+description = "Your project description"
+dependencies = [
+    "pandas",
+]
+
+# [tool.uv]
+# name = "pandas-processors"
+# version = "0.1.0"
+# description = "Utilities for pandas DataFrame processing."
+# authors = ["dk <dk@gmail.com>"]
+# readme = "README.md"
